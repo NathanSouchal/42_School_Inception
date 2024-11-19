@@ -22,19 +22,19 @@ build: build_mariadb build_nginx build_wordpress
 .PHONY: build_mariadb
 build_mariadb:
 	@echo "Building mariadb image..."
-	docker build -t $(PROJECT_NAME)_mariadb $(DOCKERFILES_DIR)/mariadb
+	docker build --no-cache -t $(PROJECT_NAME)_mariadb $(DOCKERFILES_DIR)/mariadb
 
 # Cible pour construire l'image de Nginx
 .PHONY: build_nginx
 build_nginx:
 	@echo "Building nginx image..."
-	docker build -t $(PROJECT_NAME)_nginx $(DOCKERFILES_DIR)/nginx
+	docker build --no-cache -t $(PROJECT_NAME)_nginx $(DOCKERFILES_DIR)/nginx
 
 # Cible pour construire l'image de WordPress
 .PHONY: build_wordpress
 build_wordpress:
 	@echo "Building wordpress image..."
-	docker build -t $(PROJECT_NAME)_wordpress $(DOCKERFILES_DIR)/wordpress
+	docker build --no-cache -t $(PROJECT_NAME)_wordpress $(DOCKERFILES_DIR)/wordpress
 
 # Cible pour démarrer les conteneurs via docker-compose
 .PHONY: up

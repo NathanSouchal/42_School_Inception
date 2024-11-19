@@ -27,10 +27,10 @@ COPY config_wp.sh /config_wp.sh
 
 RUN chmod +x /config_wp.sh
 
-# Exposer le port pour PHP-FPM
-EXPOSE 9000
+# # Exposer le port pour PHP-FPM
+# EXPOSE 9000
 
-# Définir le script wait-for-mariadb.sh comme point d'entrée
+# Définir le script config_wp.sh comme point d'entrée
 ENTRYPOINT ["/config_wp.sh"]
 
 # Démarrer PHP-FPM en mode premier plan

@@ -1,27 +1,31 @@
 FROM debian:bullseye
 
+# Met à jour le système et installe Nginx et OpenSSL
 RUN apt update -y && apt upgrade -y && \
     apt install -y nginx openssl
 
-# Repertoire ou seront stocker les certificats SSL
+# Crée le répertoire pour les certificats SSL
 RUN mkdir -p /etc/nginx/ssl
 
-# Generation d'un certificat SSL auto-signe, x509 format standard de cert SSL, -nodes pas de mot de passe pour la key
-RUN openssl req -x509 -nodes -out \
-/etc/nginx/ssl/inception.crt -keyout \
-/etc/nginx/ssl/inception.key -subj \
-"/C=FR/ST=ARA/L=Lyon/0=42/OU=42/CN=nsouchal.42.fr/UID=nsouchal"
+# Génère un certificat SSL auto-signé
+RUN openssl req -x509 -nodes -out /etc/nginx/ssl/inception.crt \
+    -keyout /etc/nginx/ssl/inception.key \
+    -subj "/C=FR/ST=ARA/L=Lyon/O=42/OU=42/CN=localhost/UID=nsouchal"
 
-# Repertoire ou seront stocker les fichiers temporaires de config de Nginx
+# Crée un répertoire pour les fichiers temporaires de configuration de Nginx
 RUN mkdir -p /var/run/nginx
 
+# Copie le fichier nginx.conf dans le conteneur
 COPY conf/nginx.conf /etc/nginx/nginx.conf
 
-# Permet au proprietaire de lire et d'executer les fichiers de ce repertoire (fichiers que le server web sert aux utilisateurs)
+# Assure que les fichiers dans /var/www/html ont les bonnes permissions pour l'utilisateur www-data
 RUN chmod 755 /var/www/html
 
-# Attribue la propriete de /var/www/html a www-data(l'utilisateur par defaut avec lequel fonctionne Nginx)
+# Attribue la propriété de /var/www/html à www-data (utilisateur par défaut de Nginx)
 RUN chown -R www-data:www-data /var/www/html
 
-# Lance Nginx et fait en sorte qu'il s'execute au premier plan
-CMD [ "nginx", "-g", "daemon off;" ]
+# Ouvre le port 8443 pour le trafic HTTPS
+EXPOSE 8443
+
+# Démarre Nginx en mode premier plan
+CMD ["nginx", "-g", "daemon off;"]
