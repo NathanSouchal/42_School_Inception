@@ -1,3 +1,5 @@
+#!/bin/bash
+
 set -e
 
 # Démarrer MariaDB en arrière-plan

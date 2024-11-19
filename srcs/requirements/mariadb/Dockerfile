@@ -9,7 +9,7 @@ RUN apt update -y && apt upgrade -y && \
 COPY conf/50-server.cnf /etc/mysql/mariadb.conf.d/50-server.cnf
 
 # Copier le script d'initialisation
-COPY docker-entrypoint.sh /docker_entrypoint.sh
+COPY docker_entrypoint.sh /docker_entrypoint.sh
 RUN chmod +x /docker_entrypoint.sh
 
 # Définir le script d'entrée et démarrer MariaDB
