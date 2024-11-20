@@ -14,6 +14,8 @@ RUN wget https://wordpress.org/wordpress-6.0.tar.gz -P /var/www && \
 # Changer le propriétaire des fichiers WordPress
 RUN chown -R www-data:www-data /var/www/wordpress
 
+RUN mkdir -p /run/php && chown -R www-data:www-data /run/php
+
 # Installer WP-CLI
 RUN curl -O https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar && \
     chmod +x wp-cli.phar && \

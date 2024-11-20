@@ -12,6 +12,11 @@ RUN openssl req -x509 -nodes -out /etc/nginx/ssl/inception.crt \
     -keyout /etc/nginx/ssl/inception.key \
     -subj "/C=FR/ST=ARA/L=Lyon/O=42/OU=42/CN=localhost/UID=nsouchal"
 
+# Ajuster les permissions des certificats SSL
+RUN chown www-data:www-data /etc/nginx/ssl/inception.* && \
+chmod 644 /etc/nginx/ssl/inception.crt && \
+chmod 600 /etc/nginx/ssl/inception.key
+
 # Crée un répertoire pour les fichiers temporaires de configuration de Nginx
 RUN mkdir -p /var/run/nginx
 

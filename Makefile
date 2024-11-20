@@ -50,13 +50,14 @@ down:
 
 # Cible pour reconstruire les conteneurs (rebuild)
 .PHONY: re
-re: down build up
+re: clean build up
 
 # Cible pour supprimer les volumes Docker (utile si vous souhaitez réinitialiser les données)
 .PHONY: clean
 clean:
 	@echo "Cleaning up Docker volumes..."
 	docker-compose -f $(DOCKER_COMPOSE_FILE) down -v
+	docker system prune -a --volumes
 
 # Cible pour vérifier l'état des conteneurs
 .PHONY: status
