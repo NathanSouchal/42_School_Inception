@@ -50,7 +50,7 @@ down:
 
 # Cible pour reconstruire les conteneurs (rebuild)
 .PHONY: re
-re: clean build up
+re: down build up
 
 # Cible pour supprimer les volumes Docker (utile si vous souhaitez réinitialiser les données)
 .PHONY: clean

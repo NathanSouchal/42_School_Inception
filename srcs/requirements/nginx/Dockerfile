@@ -10,7 +10,7 @@ RUN mkdir -p /etc/nginx/ssl
 # Génère un certificat SSL auto-signé
 RUN openssl req -x509 -nodes -out /etc/nginx/ssl/inception.crt \
     -keyout /etc/nginx/ssl/inception.key \
-    -subj "/C=FR/ST=ARA/L=Lyon/O=42/OU=42/CN=localhost/UID=nsouchal"
+    -subj "/C=FR/ST=ARA/L=Lyon/O=42/OU=42/CN=nsouchal.42.fr/UID=nsouchal"
 
 # Ajuster les permissions des certificats SSL
 RUN chown www-data:www-data /etc/nginx/ssl/inception.* && \
