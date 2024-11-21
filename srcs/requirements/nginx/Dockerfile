@@ -29,8 +29,8 @@ RUN chmod 755 /var/www/html
 # Attribue la propriété de /var/www/html à www-data (utilisateur par défaut de Nginx)
 RUN chown -R www-data:www-data /var/www/html
 
-# Ouvre le port 8443 pour le trafic HTTPS
-EXPOSE 8443
+# Ouvre le port 443 pour le trafic HTTPS
+EXPOSE 443
 
 # Démarre Nginx en mode premier plan
 CMD ["nginx", "-g", "daemon off;"]

@@ -58,6 +58,8 @@ clean:
 	@echo "Cleaning up Docker volumes..."
 	docker-compose -f $(DOCKER_COMPOSE_FILE) down -v
 	docker system prune -a --volumes
+	sudo rm -rf /home/nsouchal/data/wordpress/*
+	sudo rm -rf /home/nsouchal/data/mariadb/*
 
 # Cible pour vérifier l'état des conteneurs
 .PHONY: status
